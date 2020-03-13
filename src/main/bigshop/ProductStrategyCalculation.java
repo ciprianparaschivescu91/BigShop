@@ -5,7 +5,7 @@ import main.bigshop.util.ProductHelper;
 
 import java.math.BigDecimal;
 
-public class ProductStrategyCalculation implements InterestCalculationStrategy {
+public class ProductStrategyCalculation implements CalculationStrategy {
 
     private final Integer MAX_SIM_CARDS_ALLOWED = 10;
 

@@ -5,7 +5,7 @@ import main.bigshop.util.ProductHelper;
 
 import java.math.BigDecimal;
 
-public class InsuranceStrategyCalculation implements InterestCalculationStrategy {
+public class InsuranceStrategyCalculation implements CalculationStrategy {
 
     @Override
     public void calculate(final ReceiptBuilder receiptBuilder, final Product product, Boolean isEarphoneInBasket) {

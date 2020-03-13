@@ -27,7 +27,7 @@ public class GenerateReceipt {
                         ProductCategory.WIRELESS_EARPHONES == productItem.getCategory());
 
         productList.forEach(product -> {
-                final InterestCalculationStrategy interestCalculationStrategy =
+                final CalculationStrategy interestCalculationStrategy =
                         factory.getInterestCalculationStrategy(product.getProductType());
                 try {
                     interestCalculationStrategy.calculate(receiptBuilder, product, isEarphoneInBasket);
