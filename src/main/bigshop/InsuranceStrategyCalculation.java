@@ -9,11 +9,10 @@ public class InsuranceStrategyCalculation implements CalculationStrategy {
 
     @Override
     public void calculate(final ReceiptBuilder receiptBuilder, final Product product, Boolean isEarphoneInBasket) {
-        final BigDecimal discount = ProductHelper.DISCOUNT.multiply(product.getPrice().getAmount());
-
         final InsuranceReceiptItemBuilder item = new InsuranceReceiptItemBuilder();
         item.withProduct(product);
         if(isEarphoneInBasket){
+            final BigDecimal discount = ProductHelper.DISCOUNT.multiply(product.getPrice().getAmount());
             item.withDiscount(discount);
             item.withFinalPrice(isEarphoneInBasket ?
                     new Money(product.getPrice().getAmount().subtract(discount), product.getPrice().getCurrency()) : product.getPrice());
