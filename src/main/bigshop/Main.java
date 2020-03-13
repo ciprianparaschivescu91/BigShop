@@ -7,8 +7,7 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        GenerateReceipt printReceipt = new GenerateReceipt();
+        final GenerateReceipt printReceipt = new GenerateReceipt();
         try {
             final Receipt receipt = printReceipt.generateReceipt(Arrays.asList(
                     "SIM card", "phone insurance", "wired earphones", "SIM card"));
