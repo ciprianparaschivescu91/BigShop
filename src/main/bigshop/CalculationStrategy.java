@@ -1,10 +1,12 @@
 package main.bigshop;
 
 import main.bigshop.model.Product;
-import main.bigshop.model.ReceiptBuilder;
+import main.bigshop.model.ReceiptItem;
+
+import java.util.List;
 
 public interface CalculationStrategy {
 
-    void calculate(final ReceiptBuilder receiptBuilder, final Product product, Boolean isEarphoneInBasket) throws Exception;
+    List<ReceiptItem> calculate(final Product product, final List<Product> products);
 
 }

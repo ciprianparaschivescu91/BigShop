@@ -1,7 +1,7 @@
 package main.bigshop;
 
 import main.bigshop.model.*;
-import main.bigshop.util.ProductHelper;
+import main.bigshop.util.ProductUtil;
 
 import java.util.*;
 import java.util.stream.Collectors;
@@ -11,7 +11,7 @@ public class GenerateReceipt {
     private final CalculationStrategyFactory factory;
 
     public GenerateReceipt() {
-        products = ProductHelper.initProductSet();
+        products = ProductUtil.initProductSet();
         factory = new CalculationStrategyFactory();
     }
 
@@ -22,24 +22,28 @@ public class GenerateReceipt {
                 .filter(item -> item.isPresent())
                 .map(item -> item.get())
                 .collect(Collectors.toList());
-        final Boolean isEarphoneInBasket = productList.stream().anyMatch(productItem ->
-                ProductCategory.WIRED_EARPHONES == productItem.getCategory() ||
-                        ProductCategory.WIRELESS_EARPHONES == productItem.getCategory());
 
+        final long simCardsCount =
+                productList.stream().filter(productItem ->
+                        ProductCategory.SIM_CARD == productItem.getCategory()).count();
+        if(simCardsCount * 2 >= ProductUtil.MAX_SIM_CARDS_ALLOWED){
+            throw new Exception("Maxim 10 Sim cards allowed");
+        }
         productList.forEach(product -> {
-                final CalculationStrategy interestCalculationStrategy =
-                        factory.getInterestCalculationStrategy(product.getProductType());
-                try {
-                    interestCalculationStrategy.calculate(receiptBuilder, product, isEarphoneInBasket);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
+            final CalculationStrategy interestCalculationStrategy =
+                    factory.getInterestCalculationStrategy(product.getProductType());
+            try {
+                final List<ReceiptItem> receiptItems = interestCalculationStrategy.calculate(product, productList);
+                receiptBuilder.addAllReceiptItems(receiptItems);
+            } catch (final Exception e) {
+                throw new RuntimeException(e);
             }
         });
 
         return receiptBuilder.build();
     }
 
-    public Optional<Product> getProduct(final String name, final Set<Product> products){
+    public Optional<Product> getProduct(final String name, final Set<Product> products) {
         return products.stream().filter(prod -> name.equals(prod.getName())).findFirst();
     }
 }

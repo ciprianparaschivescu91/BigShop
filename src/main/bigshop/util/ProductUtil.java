@@ -5,11 +5,12 @@ import main.bigshop.model.*;
 import java.math.BigDecimal;
 import java.util.*;
 
-public class ProductHelper {
+public class ProductUtil {
 
     public static final BigDecimal DISCOUNT = new BigDecimal(0.2).setScale(2, BigDecimal.ROUND_HALF_UP);
     public static final BigDecimal SALES_TAX = new BigDecimal(0.12).setScale(2, BigDecimal.ROUND_HALF_UP);
     public static final String CURRENCY_CHF = "CHF";
+    public static final Integer MAX_SIM_CARDS_ALLOWED = 10;
 
     public static Set<Product> initProductSet(){
         final Set<Product> products = new HashSet<>();
