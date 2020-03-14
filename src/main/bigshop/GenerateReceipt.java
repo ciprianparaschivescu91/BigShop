@@ -26,18 +26,14 @@ public class GenerateReceipt {
         final long simCardsCount =
                 productList.stream().filter(productItem ->
                         ProductCategory.SIM_CARD == productItem.getCategory()).count();
-        if(simCardsCount * 2 >= ProductUtil.MAX_SIM_CARDS_ALLOWED){
+        if (simCardsCount * 2 >= ProductUtil.MAX_SIM_CARDS_ALLOWED) {
             throw new Exception("Maxim 10 Sim cards allowed");
         }
         productList.forEach(product -> {
             final CalculationStrategy interestCalculationStrategy =
                     factory.getInterestCalculationStrategy(product.getProductType());
-            try {
-                final List<ReceiptItem> receiptItems = interestCalculationStrategy.calculate(product, productList);
-                receiptBuilder.addAllReceiptItems(receiptItems);
-            } catch (final Exception e) {
-                throw new RuntimeException(e);
-            }
+            final List<ReceiptItem> receiptItems = interestCalculationStrategy.calculate(product, productList);
+            receiptBuilder.addAllReceiptItems(receiptItems);
         });
 
         return receiptBuilder.build();
