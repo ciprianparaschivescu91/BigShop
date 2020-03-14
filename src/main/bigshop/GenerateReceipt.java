@@ -18,7 +18,7 @@ public class GenerateReceipt {
     public Receipt generateReceipt(final List<String> items) throws Exception {
         final ReceiptBuilder receiptBuilder = new ReceiptBuilder();
         final List<Product> productList = items.stream()
-                .map(item -> getProduct(item, products))
+                .map(item -> getProductByName(item, products))
                 .filter(item -> item.isPresent())
                 .map(item -> item.get())
                 .collect(Collectors.toList());
@@ -26,7 +26,7 @@ public class GenerateReceipt {
         final long simCardsCount =
                 productList.stream().filter(productItem ->
                         ProductCategory.SIM_CARD == productItem.getCategory()).count();
-        if (simCardsCount * 2 >= ProductUtil.MAX_SIM_CARDS_ALLOWED) {
+        if (simCardsCount * 2 > ProductUtil.MAX_SIM_CARDS_ALLOWED) {
             throw new Exception("Maxim 10 Sim cards allowed");
         }
         productList.forEach(product -> {
@@ -39,7 +39,7 @@ public class GenerateReceipt {
         return receiptBuilder.build();
     }
 
-    public Optional<Product> getProduct(final String name, final Set<Product> products) {
+    public Optional<Product> getProductByName(final String name, final Set<Product> products) {
         return products.stream().filter(prod -> name.equals(prod.getName())).findFirst();
     }
 }
