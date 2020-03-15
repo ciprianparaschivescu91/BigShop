@@ -17,35 +17,35 @@ public class ProductUtil {
         final Product simCardProduct = new ProductBuilder()
                 .withCategory(ProductCategory.SIM_CARD)
                 .withProductType(ProductType.PRODUCT)
-                .withName("SIM card")
+                .withName(ProductCategory.SIM_CARD.getName())
                 .withPrice(new Money(new BigDecimal(20), Currency.getInstance(CURRENCY_CHF)))
                 .build();
 
         final Product phoneCaseProduct = new ProductBuilder()
                 .withCategory(ProductCategory.PHONE_CASE)
                 .withProductType(ProductType.PRODUCT)
-                .withName("phone case")
+                .withName(ProductCategory.PHONE_CASE.getName())
                 .withPrice(new Money(new BigDecimal(10), Currency.getInstance(CURRENCY_CHF)))
                 .build();
 
         final Product phoneInsuranceProduct = new ProductBuilder()
                 .withCategory(ProductCategory.PHONE_INSURANCE)
                 .withProductType(ProductType.INSURANCE)
-                .withName("phone insurance")
+                .withName(ProductCategory.PHONE_INSURANCE.getName())
                 .withPrice(new Money(new BigDecimal(120), Currency.getInstance(CURRENCY_CHF)))
                 .build();
 
         final Product wiredEarphonesProduct = new ProductBuilder()
                 .withCategory(ProductCategory.WIRED_EARPHONES)
                 .withProductType(ProductType.PRODUCT)
-                .withName("wired earphones")
+                .withName(ProductCategory.WIRED_EARPHONES.getName())
                 .withPrice(new Money(new BigDecimal(30), Currency.getInstance(CURRENCY_CHF)))
                 .build();
 
         final Product wirelessEarphonesProduct = new ProductBuilder()
                 .withCategory(ProductCategory.WIRELESS_EARPHONES)
                 .withProductType(ProductType.PRODUCT)
-                .withName("wireless earphones")
+                .withName(ProductCategory.WIRELESS_EARPHONES.getName())
                 .withPrice(new Money(new BigDecimal(50), Currency.getInstance(CURRENCY_CHF)))
                 .build();
 
